@@ -1,28 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Mail, Phone, MapPin, GraduationCap } from 'lucide-react';
+import SchoolLogo from '@/assets/Dehli-Public-School-Logo-hd-png-white.png';
 
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 mb-12">
           {/* School Info */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary-foreground flex items-center justify-center">
-                <GraduationCap className="h-7 w-7 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-display text-lg font-bold">
-                  International Delhi Public School
-                </h3>
-                <p className="text-sm opacity-80">Gangavathi</p>
-              </div>
+            <div className="flex items-center gap-3 mb-2">
+                <img
+                src={SchoolLogo}
+                alt="International Delhi Public School Logo"
+                className="h-30 md:h-30 w-auto"
+                />
             </div>
-            <p className="text-sm opacity-90 leading-relaxed mb-6">
-              International Delhi Public School, Gangavathi, offers quality education with modern teaching, 
-              a well-rounded curriculum, and a supportive environment, helping students grow academically, 
+            <p className="text-sm opacity-90 leading-relaxed mb-6 text-justify">
+              International Delhi Public School, Gangavathi, offers quality education with modern teaching,
+              a well-rounded curriculum, and a supportive environment, helping students grow academically,
               socially, and personally for a successful future.
             </p>
             <div className="flex gap-4">

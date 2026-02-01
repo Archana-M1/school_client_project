@@ -9,20 +9,20 @@ export function AboutSchoolSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="section-title">International Delhi Public School – Gangavathi</h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              International Delhi Public School, Gangavathi, is committed to providing quality education 
-              that nurtures the intellectual, emotional, and social development of every student. Our 
-              school combines traditional values with modern teaching methodologies to create a learning 
+            <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
+              International Delhi Public School, Gangavathi, is committed to providing quality education
+              that nurtures the intellectual, emotional, and social development of every student. Our
+              school combines traditional values with modern teaching methodologies to create a learning
               environment that is both challenging and supportive.
             </p>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              With state-of-the-art facilities, experienced faculty, and a comprehensive curriculum, 
-              we prepare our students not just for academic success, but for life. Our focus on 
-              character building, critical thinking, and creativity ensures that every graduate 
+            <p className="text-muted-foreground leading-relaxed mb-6 text-justify">
+              With state-of-the-art facilities, experienced faculty, and a comprehensive curriculum,
+              we prepare our students not just for academic success, but for life. Our focus on
+              character building, critical thinking, and creativity ensures that every graduate
               is equipped to face the challenges of the future.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
-              We believe that education is the foundation of a strong society, and we are dedicated 
+            <p className="text-muted-foreground leading-relaxed text-justify">
+              We believe that education is the foundation of a strong society, and we are dedicated
               to shaping responsible citizens who will contribute positively to the world.
             </p>
           </div>
@@ -73,21 +73,27 @@ export function DirectorSection() {
             </div>
             <div className="md:col-span-2">
               <h2 className="section-title">Director's Message</h2>
-              <blockquote className="text-muted-foreground leading-relaxed space-y-4">
+              <blockquote className="text-muted-foreground leading-relaxed space-y-4 text-justify">
                 <p>
-                  "Welcome to International Delhi Public School, Gangavathi. As the Director of this 
-                  esteemed institution, I am honored to lead a team of dedicated educators who share 
+                  "Welcome to International Delhi Public School, Gangavathi. As the Director of this
+                  esteemed institution, I am honored to lead a team of dedicated educators who share
                   a common vision – to nurture young minds and help them realize their full potential.
                 </p>
                 <p>
-                  Our school is more than just a place of learning; it is a community where students 
-                  are encouraged to explore, question, and grow. We believe in providing a holistic 
-                  education that balances academic rigor with extracurricular activities, ensuring 
+                  Our school is more than just a place of learning; it is a community where students
+                  are encouraged to explore, question, and grow. We believe in providing a holistic
+                  education that balances academic rigor with extracurricular activities, ensuring
                   that every student develops into a well-rounded individual.
                 </p>
                 <p>
-                  I invite you to be a part of our journey as we continue to strive for excellence 
+                  I invite you to be a part of our journey as we continue to strive for excellence
                   in education. Together, let us build a brighter future for our children."
+                </p>
+                <p>
+                  Warm Regards,<br />
+                  Dr J SRINIVAS<br />
+                  MSc,MEd,PhD.<br />
+                  Director & Principal
                 </p>
               </blockquote>
             </div>

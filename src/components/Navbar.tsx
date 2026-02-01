@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, GraduationCap } from 'lucide-react';
 import { ThemeSwitcher } from './ThemeSwitcher';
-
+import SchoolLogo from '@/assets/Dehli-Public-School-Logo-hd-png.png';
 const academicsLinks = [
   { href: '/academics/primary-school', label: 'Primary School' },
   { href: '/academics/middle-school', label: 'Middle School' },
@@ -59,17 +59,13 @@ export function Navbar() {
       <nav className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo & School Name */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-              <GraduationCap className="h-7 w-7 text-primary-foreground" />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-sm font-bold text-primary leading-tight">
-                International Delhi Public School
-              </h1>
-              <p className="text-xs text-muted-foreground">Gangavathi</p>
-            </div>
-          </Link>
+            <Link to="/" className="flex items-center gap-3">
+            <img
+              src={SchoolLogo}
+              alt="International Delhi Public School Logo"
+              className="h-16 md:h-20 w-auto"
+            />
+            </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -116,7 +112,7 @@ export function Navbar() {
 
           {/* Theme Switcher & Mobile Menu Button */}
           <div className="flex items-center gap-2">
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
             <button
               className="lg:hidden p-2 rounded-lg hover:bg-accent transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -141,7 +137,7 @@ export function Navbar() {
               >
                 Home
               </Link>
-              
+
               {/* Academics */}
               <div className="px-4 py-2 font-semibold text-primary">Academics</div>
               {academicsLinks.map((link) => (
@@ -154,7 +150,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              
+
               {/* Admissions */}
               <div className="px-4 py-2 font-semibold text-primary">Admissions</div>
               {admissionsLinks.map((link) => (
@@ -167,7 +163,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              
+
               {/* Beyond Academics */}
               <div className="px-4 py-2 font-semibold text-primary">Beyond Academics</div>
               {beyondAcademicsLinks.map((link) => (
@@ -180,7 +176,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              
+
               <Link
                 to="/about"
                 className="px-4 py-2 rounded-lg hover:bg-accent transition-colors"

@@ -11,12 +11,12 @@ export function EnquirySection() {
             Take the first step towards your child's bright future. Connect with us to learn more about 
             our admissions process, curriculum, and facilities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/admissions/enquiry" className="btn-primary inline-flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/admissions/enquiry" className="btn-primary inline-flex items-center justify-center gap-2 w-full sm:w-auto">
               Submit Enquiry
               <ArrowRight className="h-5 w-5" />
             </Link>
-            <a href="tel:+918884461238" className="btn-outline inline-flex items-center gap-2">
+            <a href="tel:+918884461238" className="btn-outline inline-flex items-center justify-center gap-2 w-full sm:w-auto">
               <Phone className="h-5 w-5" />
               Call Us Now
             </a>
@@ -37,17 +37,17 @@ export function HelpSection() {
         <p className="text-xl opacity-90 mb-8">
           Admissions Started for 2025–2026
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link 
-            to="/admissions/enquiry" 
-            className="btn-primary bg-primary-foreground text-primary hover:bg-primary-foreground/90 inline-flex items-center gap-2"
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            to="/admissions/enquiry"
+            className="btn-primary bg-primary-foreground text-primary hover:bg-primary-foreground/90 inline-flex items-center justify-center gap-2 w-full sm:w-auto"
           >
             Enquire Now
             <ArrowRight className="h-5 w-5" />
           </Link>
-          <Link 
-            to="/admissions/procedures" 
-            className="btn-outline border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+          <Link
+            to="/admissions/procedures"
+            className="btn-outline border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary inline-flex items-center justify-center w-full sm:w-auto"
           >
             View Admission Process
           </Link>
