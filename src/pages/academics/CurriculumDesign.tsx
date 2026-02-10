@@ -139,7 +139,7 @@ const CurriculumDesign = () => {
             <p className="text-lg text-muted-foreground mb-8 text-justify leading-relaxed">
               At IDPS Gangavathi, we believe that education is not just about academics. Our students take part in many activities. These help them build confidence, discipline, and a sense of responsibility. These include:
             </p>
-            <div className="bg-background border-2 border-border rounded-xl p-8">
+            <div className="bg-background border-2 border-border rounded-xl p-8 text-justify">
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <span className="font-bold text-primary flex-shrink-0">01.</span>
