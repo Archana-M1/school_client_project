@@ -1,16 +1,113 @@
 import { Layout } from '@/components/Layout';
-import { Send, Phone } from 'lucide-react';
-import { useState } from 'react';
+import { Send, Phone, Loader2 } from 'lucide-react';
+import { useState, FormEvent } from 'react';
+import { useToast } from '@/hooks/use-toast';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+interface EnquiryFormData {
+  studentName: string;
+  dateOfBirth: string;
+  parentName: string;
+  board: string;
+  grade: string;
+  previousSchool: string;
+  email: string;
+  phone: string;
+  address: string;
+}
 
 const AdmissionEnquiry = () => {
-  const [selectedBoard, setSelectedBoard] = useState('');
-  const [selectedGrade, setSelectedGrade] = useState('');
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<EnquiryFormData>({
+    studentName: '',
+    dateOfBirth: '',
+    parentName: '',
+    board: '',
+    grade: '',
+    previousSchool: '',
+    email: '',
+    phone: '',
+    address: '',
+  });
 
   const grades = [
     'Grade - 1', 'Grade - 2', 'Grade - 3', 'Grade - 4',
     'Grade - 5', 'Grade - 6', 'Grade - 7', 'Grade - 8',
     'Grade - 9', 'Grade - 10', 'Grade - 11', 'Grade - 12'
   ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.board) {
+      toast({
+        title: 'Please select a board',
+        description: 'Choose either CBSE or State Board.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.grade) {
+      toast({
+        title: 'Please select a grade',
+        description: 'Choose the grade for admission.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`${API_URL}/api/admission-enquiry`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast({
+          title: 'Enquiry Submitted!',
+          description: 'Thank you for your interest. Our admissions team will contact you soon.',
+        });
+
+        setFormData({
+          studentName: '',
+          dateOfBirth: '',
+          parentName: '',
+          board: '',
+          grade: '',
+          previousSchool: '',
+          email: '',
+          phone: '',
+          address: '',
+        });
+      } else {
+        throw new Error(data.message || 'Failed to submit enquiry');
+      }
+    } catch (error) {
+      console.error('Admission enquiry error:', error);
+      toast({
+        title: 'Failed to submit enquiry',
+        description: 'Please try again later or contact us directly via phone.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Layout>
@@ -36,12 +133,15 @@ const AdmissionEnquiry = () => {
             {/* Enquiry Form */}
             <div className="card-elevated p-8">
               <h3 className="text-2xl font-display font-bold mb-8 text-center">Enquiry Form</h3>
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Student Name */}
                 <div>
                   <label className="block text-sm font-medium mb-2">Student Name <span className="text-red-500">*</span></label>
                   <input
                     type="text"
+                    name="studentName"
+                    value={formData.studentName}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="Enter student's full name"
@@ -53,6 +153,9 @@ const AdmissionEnquiry = () => {
                   <label className="block text-sm font-medium mb-2">Date of Birth <span className="text-red-500">*</span></label>
                   <input
                     type="date"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                   />
@@ -63,6 +166,9 @@ const AdmissionEnquiry = () => {
                   <label className="block text-sm font-medium mb-2">Parent/Guardian Name <span className="text-red-500">*</span></label>
                   <input
                     type="text"
+                    name="parentName"
+                    value={formData.parentName}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="Enter parent/guardian name"
@@ -78,8 +184,8 @@ const AdmissionEnquiry = () => {
                         type="radio"
                         name="board"
                         value="CBSE"
-                        checked={selectedBoard === 'CBSE'}
-                        onChange={(e) => setSelectedBoard(e.target.value)}
+                        checked={formData.board === 'CBSE'}
+                        onChange={handleChange}
                         className="w-4 h-4 text-primary border-border focus:ring-primary"
                       />
                       <span className="text-muted-foreground">CBSE</span>
@@ -89,8 +195,8 @@ const AdmissionEnquiry = () => {
                         type="radio"
                         name="board"
                         value="State Board"
-                        checked={selectedBoard === 'State Board'}
-                        onChange={(e) => setSelectedBoard(e.target.value)}
+                        checked={formData.board === 'State Board'}
+                        onChange={handleChange}
                         className="w-4 h-4 text-primary border-border focus:ring-primary"
                       />
                       <span className="text-muted-foreground">State Board</span>
@@ -108,8 +214,8 @@ const AdmissionEnquiry = () => {
                           type="radio"
                           name="grade"
                           value={grade}
-                          checked={selectedGrade === grade}
-                          onChange={(e) => setSelectedGrade(e.target.value)}
+                          checked={formData.grade === grade}
+                          onChange={handleChange}
                           className="w-4 h-4 text-primary border-border focus:ring-primary"
                         />
                         <span className="text-muted-foreground text-sm">{grade}</span>
@@ -123,6 +229,9 @@ const AdmissionEnquiry = () => {
                   <label className="block text-sm font-medium mb-2">Previous School (if any)</label>
                   <input
                     type="text"
+                    name="previousSchool"
+                    value={formData.previousSchool}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="Enter previous school name"
                   />
@@ -133,6 +242,9 @@ const AdmissionEnquiry = () => {
                   <label className="block text-sm font-medium mb-2">Email <span className="text-red-500">*</span></label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="your@email.com"
@@ -144,6 +256,9 @@ const AdmissionEnquiry = () => {
                   <label className="block text-sm font-medium mb-2">Phone Number (Father/Mother) <span className="text-red-500">*</span></label>
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     placeholder="+91 9876543210"
@@ -154,6 +269,9 @@ const AdmissionEnquiry = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">Address <span className="text-red-500">*</span></label>
                   <textarea
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
                     rows={3}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
@@ -162,9 +280,22 @@ const AdmissionEnquiry = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button type="submit" className="btn-primary w-full inline-flex items-center justify-center gap-2">
-                  <Send className="h-5 w-5" />
-                  Submit
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-primary w-full inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5" />
+                      Submit
+                    </>
+                  )}
                 </button>
               </form>
             </div>
