@@ -10,6 +10,8 @@ import {
   HelpCircle,
 } from 'lucide-react';
 
+import { useNavigate } from 'react-router-dom';
+
 const activities = [
   { icon: Trophy, label: 'Sports' },
   { icon: Dumbbell, label: 'Exercise' },
@@ -23,6 +25,8 @@ const activities = [
 ];
 
 export function ActivitiesSection() {
+  const navigate = useNavigate();   // ✅ create navigate function
+
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -35,14 +39,21 @@ export function ActivitiesSection() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {activities.map((activity, index) => (
-            <div
-              key={index}
-              className="activity-card"
-            >
+            <div key={index} className="activity-card">
               <activity.icon className="h-10 w-10 mb-3" />
               <span className="font-medium text-sm">{activity.label}</span>
             </div>
           ))}
+        </div>
+
+        {/* Explore Images Button */}
+        <div className="text-center mt-10">
+          <button
+            onClick={() => navigate("/gallery")}   // ✅ correct usage
+            className="px-6 py-3 bg-primary text-white rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            Explore Images
+          </button>
         </div>
       </div>
     </section>

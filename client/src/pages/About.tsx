@@ -1,6 +1,6 @@
 import { Layout } from '@/components/Layout';
 import { CheckCircle, Target, Users, Award, MessageSquare, FlaskConical, Monitor, UserCheck } from 'lucide-react';
-import schoolImage from '@/assets/school-about-1.jpg';
+import schoolImage from '@/assets/LandingPageImages/hero-1.jpeg';
 import libraryImage from '@/assets/school-about-2.jpg';
 
 const About = () => {
