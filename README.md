@@ -1,1 +1,0 @@
-# school_client_project
